@@ -17,6 +17,7 @@ spec:
   template:
     metadata:
       labels:
+        env: dev
         app: jenkins
         ver: "1.0"
     spec:
