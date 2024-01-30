@@ -23,7 +23,7 @@ spec:
     spec:
       containers:
         - name: jenkins
-          image: jenkins/jenkins:jdk-11
+          image: jenkins/jenkins:jdk11
           resources:
             limits:
               cpu: 2000m
@@ -42,7 +42,7 @@ spec:
     app: jenkins
   type: NodePort
   ports:
-    - name: jenkin
+    - name: jenkins
       nodePort: 30002
       targetPort: 8080
       port: 8080
