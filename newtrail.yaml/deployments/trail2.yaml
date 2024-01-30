@@ -1,0 +1,44 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: deployt1
+spec:
+  minReadySeconds: 10
+  replicas: 10
+  selector:
+    matchLabels:
+      env: dev
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 40%
+      maxUnavailable: 40%
+  template:
+    metadata:
+    labels:
+      app: jenkins
+      ver: "1.0"
+  spec:
+  containers:
+    name: jenkins
+    image: jenkins/jenkins:jdk11
+
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: deployt-svc
+spec:
+  selector:
+    app: jenkin
+  type: NodePort
+  ports:
+    - name: jenkin
+      nodePort: 30002
+      targetPort: 8080
+      port: 8080
+
+      
