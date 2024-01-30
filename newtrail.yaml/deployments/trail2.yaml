@@ -2,13 +2,14 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: deployt1
+  name: trail2-deploy
 spec:
-  minReadySeconds: 10
+  minReadySeconds: 30
+  progressDeadlineSeconds: 600
   replicas: 10
   selector:
     matchLabels:
-      env: dev
+      app: jenkins
   strategy:
     type: RollingUpdate
     rollingUpdate:
@@ -17,14 +18,18 @@ spec:
   template:
     metadata:
       labels:
-        env: dev
         app: jenkins
-        ver: "1.0"
+        ver: "v1.0"
     spec:
       containers:
         - name: jenkins
-          image: jenkins/jenkins:jdk11
-
+          image: jenkins/jenkins:jdk-11
+          resources:
+            limits:
+              cpu: 2000m
+              memory: 2Gi
+          ports:
+            - containerPort: 8080
 
 
 ---
