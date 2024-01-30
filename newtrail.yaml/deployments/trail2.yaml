@@ -20,9 +20,9 @@ spec:
       app: jenkins
       ver: "1.0"
   spec:
-  containers:
-    name: jenkins
-    image: jenkins/jenkins:jdk11
+    containers:
+      - name: jenkins
+        image: jenkins/jenkins:jdk11
 
 
 
@@ -33,7 +33,7 @@ metadata:
   name: deployt-svc
 spec:
   selector:
-    app: jenkin
+    app: jenkins
   type: NodePort
   ports:
     - name: jenkin
