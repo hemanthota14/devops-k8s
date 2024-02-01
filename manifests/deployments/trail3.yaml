@@ -1,0 +1,39 @@
+---
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata: 
+  name: apache-3pods
+  labels: 
+spec:
+  minReadySeconds: 5
+  replicas: 3
+  selector:
+    matchLabels:
+      app: apache
+  template:
+    metadata:
+      name: apache-pods3
+      labels: 
+        app: apache
+    spec:
+      containers:
+        - name: apache
+          image: httpd
+          ports:
+            - containerPort: 80
+
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: apache-svc
+spec: 
+  type: NodePort
+  selector:
+    app: httpd
+  ports:
+    - name: apache
+      port: 80
+      targetPort: 80
+      nodePort: 30002
